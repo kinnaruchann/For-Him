@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Untuk DarDar 💌</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Comic Sans MS', cursive;
+      background: linear-gradient(#ffe6ec, #ffddee);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    h1 {
+      font-size: 2.5rem;
+      color: #d6336c;
+      margin-bottom: 10px;
+      animation: fadeIn 2s ease;
+    }
+    #timer {
+      font-size: 1.2rem;
+      color: #6a0f3c;
+      margin-bottom: 20px;
+    }
+    .letter {
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      padding: 20px;
+      width: 90%;
+      max-width: 600px;
+      text-align: center;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+    .letter:hover {
+      transform: scale(1.02);
+    }
+    .message {
+      display: none;
+      margin-top: 20px;
+      font-size: 1.1rem;
+      color: #333;
+      white-space: pre-wrap;
+    }
+    .hearts {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 0;
+    }
+    .heart {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: red;
+      transform: rotate(45deg);
+      animation: float 6s linear infinite;
+    }
+    .heart::before,
+    .heart::after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: red;
+      border-radius: 50%;
+    }
+    .heart::before {
+      top: -10px;
+      left: 0;
+    }
+    .heart::after {
+      left: -10px;
+      top: 0;
+    }
+    @keyframes float {
+      0% {
+        transform: translateY(100vh) rotate(45deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-10vh) rotate(45deg);
+        opacity: 0;
+      }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <h1>Hai DarDar 💖</h1>
+  <div id="timer"></div>
+
+  <div class="letter" onclick="toggleMessage()">
+    📩 Klik untuk baca surat dari aku
+    <div class="message" id="message">
+      Hi beb, maaf ya selama ini aku jahatin kamu. Aku dingin, aku jahat, dan bahkan aku suka ingkarin janji aku ke kamu. Aku cuma mau kamu tau kalau aku sayang banget sama kamu dan... aku benar benar haus akan perhatian kamu makanya aku suka ngelakuin hal yang nggak nggak. Aku benar benar berharap kita bisa balik bersama lagi karena aku sayang kamu dan aku ga suka kita musuhan kaya gini. Aku janji, aku bakal jadi pacar yang lebih baik lagi buat kamu. Aku menyesal sudah melakukan itu semua. I love you bebeb <3
+    </div>
+  </div>
+
+  <div class="hearts" id="hearts"></div>
+
+  <audio autoplay loop>
+    <source src="https://cdn.pixabay.com/download/audio/2023/04/01/audio_80dfe8fbdf.mp3?filename=calm-soul-141091.mp3" type="audio/mp3">
+  </audio>
+
+  <script>
+    const startDate = new Date("2024-08-06T00:00:00");
+    const timerEl = document.getElementById('timer');
+
+    function updateTimer() {
+      const now = new Date();
+      const diff = now - startDate;
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((diff / (1000 * 60)) % 60);
+      const seconds = Math.floor((diff / 1000) % 60);
+
+      timerEl.textContent = `Kita sudah bersama selama: ${days} hari, ${hours} jam, ${minutes} menit, ${seconds} detik ❤️`;
+    }
+
+    setInterval(updateTimer, 1000);
+    updateTimer();
+
+    function toggleMessage() {
+      const msg = document.getElementById('message');
+      msg.style.display = msg.style.display === 'block' ? 'none' : 'block';
+    }
+
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.className = 'heart';
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDuration = 4 + Math.random() * 4 + 's';
+      document.getElementById('hearts').appendChild(heart);
+      setTimeout(() => heart.remove(), 7000);
+    }
+    setInterval(createHeart, 300);
+  </script>
+</body>
+</html>
